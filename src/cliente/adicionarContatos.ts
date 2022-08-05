@@ -31,14 +31,14 @@ function tipoNum(tipo: CreateClienteDto) {
   if (
     (tipo.tipo.includes('WhatsApp', 0) && tipo.tipo.includes('Telefone', 0)) ||
     tipo.tipo.includes('Hibrido', 0)
-    ) {
+  ) {
     cliente.whatsapp = cliente.telefone = true;
-  console.log('Tem Ambos');
-} else if (tipo.tipo.includes('Telefone', 0)) {
-  cliente.whatsapp = false;
-  cliente.telefone = true;
-  console.log('Tem somente Telefone');
-}
-const tipos = [cliente.whatsapp, cliente.telefone];
-return tipos;
+    console.log('Tem Ambos');
+  } else if (tipo.tipo.includes('Telefone', 0)) {
+    cliente.whatsapp = false;
+    cliente.telefone = true;
+    console.log('Tem somente Telefone');
+  }
+  const tipos = [cliente.whatsapp, cliente.telefone];
+  return tipos;
 }
