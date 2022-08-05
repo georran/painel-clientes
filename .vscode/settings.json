@@ -16,5 +16,6 @@
         "tipo",
         "typeorm",
         "versao"
-    ]
+    ],
+    "cSpell.language": "en,pt-BR"
 }

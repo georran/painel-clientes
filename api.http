@@ -1,7 +1,7 @@
 GET http://localhost:3000/cliente/
 
 ###
-GET http://localhost:3000/numero-servico/13
+GET http://localhost:3000/numero-servico/
 
 ### 
 POST http://localhost:3000/cliente
@@ -13,7 +13,7 @@ Content-Type: application/json
   "versao": 3.00,
   "dataImplatancao": "2022-04-08",
   "idnum": [43991362715,43984420289],
-  "tipo": ["WhatsApp","Hibrido"]
+  "tipo": ["WhatsApp","WhatsApp"]
 }
 
 ### 
