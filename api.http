@@ -1,0 +1,47 @@
+GET http://localhost:3000/cliente/
+
+###
+GET http://localhost:3000/numero-servico/13
+
+### 
+POST http://localhost:3000/cliente
+Content-Type: application/json
+
+{
+  "empresa": "Pedrinho CasaGrande Show",
+  "mensalidade": 1799.99,
+  "versao": 3.00,
+  "dataImplatancao": "2022-04-08",
+  "idnum": [43991362715,43984420289],
+  "tipo": ["WhatsApp","Hibrido"]
+}
+
+### 
+POST http://localhost:3000/numero-servico
+Content-Type: application/json
+
+{
+  "cliente": 4,
+  "identificador": 48988270189,
+  "ntipo": "Telefone"
+}
+
+###
+PATCH  http://localhost:3000/numero-servico/13
+Content-Type: application/json
+
+{
+    "cliente": 4
+}
+
+###
+PATCH  http://localhost:3000/cliente/1
+Content-Type: application/json
+
+{
+  "versao": 2.91,
+  "observacoes": "Cliente em processo de adição de mais numeros de WhatsApp"
+}
+
+###
+DELETE http://localhost:3000/cliente/50
