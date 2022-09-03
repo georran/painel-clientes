@@ -1,17 +1,9 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
-import { NumeroServicoService } from './numero-servico.service';
-import { CreateNumeroServicoDto } from './dto/create-numero-servico.dto';
-import { UpdateNumeroServicoDto } from './dto/update-numero-servico.dto';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from "@nestjs/common";
+import { NumeroServicoService } from "./numero-servico.service";
+import { CreateNumeroServicoDto } from "./dto/create-numero-servico.dto";
+import { UpdateNumeroServicoDto } from "./dto/update-numero-servico.dto";
 
-@Controller('numero-servico')
+@Controller("numero-servico")
 export class NumeroServicoController {
   constructor(private readonly numeroServicoService: NumeroServicoService) {}
 
@@ -25,21 +17,24 @@ export class NumeroServicoController {
     return this.numeroServicoService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.numeroServicoService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateNumeroServicoDto: UpdateNumeroServicoDto,
-  ) {
+  @Get("n/:identificador")
+  findIdentificador(@Param("identificador") identificador: string) {
+    return this.numeroServicoService.findByNumber(+identificador);
+  }
+
+  @Patch(":id")
+  update(@Param("id") id: string, @Body() updateNumeroServicoDto: UpdateNumeroServicoDto) {
     return this.numeroServicoService.update(+id, updateNumeroServicoDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @HttpCode(204)
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.numeroServicoService.remove(+id);
   }
 }

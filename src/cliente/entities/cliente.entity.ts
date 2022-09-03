@@ -1,18 +1,12 @@
-import { NumeroServico } from './../../numero-servico/entities/numero-servico.entity';
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  OneToMany,
-  JoinColumn,
-} from 'typeorm';
+import { NumeroServico } from "./../../numero-servico/entities/numero-servico.entity";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
 
 @Entity()
 export class Cliente {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: false })
   empresa: string;
 
   @Column()
@@ -33,7 +27,7 @@ export class Cliente {
   @Column({ default: false })
   telefone: boolean;
 
-  @OneToMany(() => NumeroServico, (numero) => numero.cliente, { cascade: true })
-  @JoinColumn({ name: 'num_id' })
+  @OneToMany(() => NumeroServico, numero => numero.cliente, { cascade: true })
+  @JoinColumn({ name: "num_id" })
   numero: NumeroServico[];
 }

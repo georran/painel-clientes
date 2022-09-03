@@ -1,9 +1,9 @@
-import { NumeroServico } from './entities/numero-servico.entity';
-import { CreateNumeroServicoDto } from './dto/create-numero-servico.dto';
-import { UpdateNumeroServicoDto } from './dto/update-numero-servico.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { HttpCode, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { NumeroServico } from "./entities/numero-servico.entity";
+import { CreateNumeroServicoDto } from "./dto/create-numero-servico.dto";
+import { UpdateNumeroServicoDto } from "./dto/update-numero-servico.dto";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class NumeroServicoService {
@@ -11,8 +11,8 @@ export class NumeroServicoService {
     @InjectRepository(NumeroServico)
     private numeroServicoRepository: Repository<NumeroServico>,
   ) {}
-  create(createNumeroServicoDto: CreateNumeroServicoDto) {
-    const numero = this.numeroServicoRepository.save(createNumeroServicoDto);
+  async create(createNumeroServicoDto: CreateNumeroServicoDto) {
+    const numero = await this.numeroServicoRepository.save(createNumeroServicoDto);
     return numero;
   }
 
@@ -24,8 +24,10 @@ export class NumeroServicoService {
     });
   }
 
-  findOne(id: number) {
-    return this.numeroServicoRepository.findOne({
+  async findOne(id: number) {
+    const numero = await this.numeroServicoRepository.preload({ id: id });
+    if (!numero) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`);
+    return await this.numeroServicoRepository.findOne({
       where: {
         id: id,
       },
@@ -35,17 +37,28 @@ export class NumeroServicoService {
     });
   }
 
-  async update(id: number, updateNumeroServicoDto: UpdateNumeroServicoDto) {
-    const numero = await this.numeroServicoRepository.update(
-      { id },
-      updateNumeroServicoDto,
-    );
-    return numero;
+  async findByNumber(identificador: number) {
+    const numero = await this.numeroServicoRepository.preload({ identificador: identificador });
+    if (!numero) throw new NotFoundException(`Nenhum registro encontrado com o identificador: ${identificador}`);
+    return this.numeroServicoRepository.findOne({
+      where: {
+        identificador: identificador,
+      },
+      relations: {
+        cliente: true,
+      },
+    });
   }
 
-  @HttpCode(204)
+  async update(id: number, updateNumeroServicoDto: UpdateNumeroServicoDto) {
+    const numero = await this.numeroServicoRepository.preload({ id: id });
+    if (!numero) throw new NotFoundException(`Nenhum registro encontrado com o id: ${id}`);
+    return this.numeroServicoRepository.update({ id }, updateNumeroServicoDto);
+  }
+
   async remove(id: number) {
-    const numero = await this.numeroServicoRepository.delete(id);
-    return numero;
+    const numero = await this.numeroServicoRepository.preload({ id: id });
+    if (!numero) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`);
+    return this.numeroServicoRepository.delete(numero);
   }
 }

@@ -1,7 +1,10 @@
 GET http://localhost:3000/cliente/
 
-###
-GET http://localhost:3000/numero-servico/
+### id
+GET http://localhost:3000/numero-servico/123
+
+### numero
+GET http://localhost:3000/numero-servico/n/43984420289
 
 ### 
 POST http://localhost:3000/cliente
@@ -12,8 +15,8 @@ Content-Type: application/json
   "mensalidade": 1799.99,
   "versao": 3.00,
   "dataImplatancao": "2022-04-08",
-  "idnum": [43991362715,43984420289],
-  "tipo": ["WhatsApp","WhatsApp"]
+  "idnum": [48988270189],
+  "tipo": ["WhatsApp"]
 }
 
 ### 
@@ -44,4 +47,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/cliente/50
+DELETE http://localhost:3000/numero-servico/50
