@@ -17,9 +17,7 @@ export class ClienteService {
   }
 
   async findAll() {
-    const cliente = await this.clientesRepository.preload({id: -});
-    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no banco`);
-    return await this.clientesRepository.find({
+    return this.clientesRepository.find({
       relations: {
         numero: true,
       },
@@ -48,6 +46,6 @@ export class ClienteService {
   async remove(id: number) {
     const cliente = await this.clientesRepository.preload({ id: id });
     if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`);
-    return await this.clientesRepository.delete(cliente);
+    return await this.clientesRepository.delete(id);
   }
 }

@@ -16,8 +16,8 @@ export class NumeroServicoService {
     return numero;
   }
 
-  findAll() {
-    return this.numeroServicoRepository.find({
+  async findAll() {
+    return await this.numeroServicoRepository.find({
       relations: {
         cliente: true,
       },
@@ -37,7 +37,7 @@ export class NumeroServicoService {
     });
   }
 
-  async findByNumber(identificador: number) {
+  async findNum(identificador: number) {
     const numero = await this.numeroServicoRepository.preload({ identificador: identificador });
     if (!numero) throw new NotFoundException(`Nenhum registro encontrado com o identificador: ${identificador}`);
     return this.numeroServicoRepository.findOne({

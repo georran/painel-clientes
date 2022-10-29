@@ -24,7 +24,7 @@ export class NumeroServicoController {
 
   @Get("n/:identificador")
   findIdentificador(@Param("identificador") identificador: string) {
-    return this.numeroServicoService.findByNumber(+identificador);
+    return this.numeroServicoService.findNum(+identificador);
   }
 
   @Patch(":id")

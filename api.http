@@ -1,10 +1,24 @@
-GET http://localhost:3000/cliente/
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "username": "mariano",
+  "password": "1597"
+}
+
+###
+GET http://localhost:3000/test-auth   
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoibWFyaWFubyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjY3MDUxMTg1LCJleHAiOjE2NjcwNTEyNDV9.3qnZPXx8a8pRYKZUu-z8U5tm1VWKOTEEL8Y1Hc8EtZs
+
+###
+GET http://localhost:3000/cliente
 
 ### id
-GET http://localhost:3000/numero-servico/123
+GET http://localhost:3000/cliente/1
 
 ### numero
-GET http://localhost:3000/numero-servico/n/43984420289
+GET http://localhost:3000/numero-servico/n/190
 
 ### 
 POST http://localhost:3000/cliente
@@ -15,8 +29,8 @@ Content-Type: application/json
   "mensalidade": 1799.99,
   "versao": 3.00,
   "dataImplatancao": "2022-04-08",
-  "idnum": [48988270189],
-  "tipo": ["WhatsApp"]
+  "idnum": [135,190],
+  "tipo": ["WhatsApp","Hibrido"]
 }
 
 ### 
@@ -47,4 +61,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/numero-servico/50
+DELETE http://localhost:3000/cliente/1

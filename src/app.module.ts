@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import 'reflect-metadata';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClienteModule } from './cliente/cliente.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,8 +20,9 @@ import { ClienteModule } from './cliente/cliente.module';
     }),
     ClienteModule,
     NumeroServicoModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
