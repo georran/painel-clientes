@@ -17,7 +17,13 @@ export class ClienteService {
   }
 
   async findAll() {
+<<<<<<< HEAD
     return this.clientesRepository.find({
+=======
+    const cliente = await this.clientesRepository.preload();
+    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no banco`);
+    return await this.clientesRepository.find({
+>>>>>>> c602dd9 (Buscar por nome número)
       relations: {
         numero: true,
       },
