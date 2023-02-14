@@ -17,22 +17,20 @@ export class ClienteService {
   }
 
   async findAll() {
-<<<<<<< HEAD
     return this.clientesRepository.find({
-=======
-    const cliente = await this.clientesRepository.preload();
-    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no banco`);
+    const cliente = await this.clientesRepository.preload(),
+    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no banco`),
     return await this.clientesRepository.find({
->>>>>>> c602dd9 (Buscar por nome número)
       relations: {
         numero: true,
       },
-    });
-  }
+    }),
+  })
+}
 
   async findOne(id: number) {
-    const cliente = await this.clientesRepository.preload({ id: id });
-    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`);
+    const cliente = await this.clientesRepository.preload({ id: id }),
+    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`),
     return this.clientesRepository.findOne({
       where: {
         id: id,
@@ -40,18 +38,18 @@ export class ClienteService {
       relations: {
         numero: true,
       },
-    });
+    }),
   }
 
   async update(id: number, updateClienteDto: UpdateClienteDto) {
-    const cliente = await this.clientesRepository.preload({ id: id });
-    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`);
-    return await this.clientesRepository.update({ id }, updateClienteDto);
+    const cliente = await this.clientesRepository.preload({ id: id }),
+    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`),
+    return await this.clientesRepository.update({ id }, updateClienteDto),
   }
 
   async remove(id: number) {
-    const cliente = await this.clientesRepository.preload({ id: id });
-    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`);
-    return await this.clientesRepository.delete(id);
+    const cliente = await this.clientesRepository.preload({ id: id }),
+    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`),
+    return await this.clientesRepository.delete(id),
   }
 }
