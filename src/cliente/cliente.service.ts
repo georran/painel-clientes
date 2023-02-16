@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { adicionarContatos } from "./adicionarContatos";
+import { criarJsonRamais } from "./criarJsonRamais";
 import { CreateClienteDto } from "./dto/create-cliente.dto";
 import { UpdateClienteDto } from "./dto/update-cliente.dto";
 import { Cliente } from "./entities/cliente.entity";
@@ -11,26 +12,20 @@ export class ClienteService {
   constructor(
     @InjectRepository(Cliente)
     private clientesRepository: Repository<Cliente>,
-  ) {}
+  ) { }
   create(createClienteDto: CreateClienteDto) {
     return this.clientesRepository.save(adicionarContatos(createClienteDto));
   }
 
   async findAll() {
-    return this.clientesRepository.find({
-    const cliente = await this.clientesRepository.preload(),
-    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no banco`),
-    return await this.clientesRepository.find({
-      relations: {
-        numero: true,
-      },
-    }),
-  })
-}
+    console.log('entrando no service')
+    criarJsonRamais(this.clientesRepository);
+    return this.clientesRepository.find();
+  }
 
   async findOne(id: number) {
-    const cliente = await this.clientesRepository.preload({ id: id }),
-    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`),
+    const cliente = await this.clientesRepository.preload({ id: id });
+    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`);
     return this.clientesRepository.findOne({
       where: {
         id: id,
@@ -38,18 +33,18 @@ export class ClienteService {
       relations: {
         numero: true,
       },
-    }),
+    })
   }
 
   async update(id: number, updateClienteDto: UpdateClienteDto) {
-    const cliente = await this.clientesRepository.preload({ id: id }),
-    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`),
-    return await this.clientesRepository.update({ id }, updateClienteDto),
+    const cliente = await this.clientesRepository.preload({ id: id });
+    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`);
+    return await this.clientesRepository.update({ id }, updateClienteDto)
   }
 
   async remove(id: number) {
-    const cliente = await this.clientesRepository.preload({ id: id }),
-    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`),
-    return await this.clientesRepository.delete(id),
+    const cliente = await this.clientesRepository.preload({ id: id });
+    if (!cliente) throw new NotFoundException(`Nenhum registro encontrado no id: ${id}`);
+    return await this.clientesRepository.delete(id)
   }
 }

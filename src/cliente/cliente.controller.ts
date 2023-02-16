@@ -1,12 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from "@nestjs/common";
 import { HttpCode } from "@nestjs/common";
 import { ClienteService } from "./cliente.service";
+import { criarJsonRamais } from "./criarJsonRamais";
 import { CreateClienteDto } from "./dto/create-cliente.dto";
 import { UpdateClienteDto } from "./dto/update-cliente.dto";
 
 @Controller("cliente")
 export class ClienteController {
-  constructor(private readonly clienteService: ClienteService) {}
+  constructor(private readonly clienteService: ClienteService) { }
 
   @Post()
   async create(@Body() createClienteDto: CreateClienteDto) {

@@ -18,6 +18,9 @@ export class Cliente {
   @Column()
   dtImplatancao: Date;
 
+  @Column()
+  dtFechamento: Date;
+
   @Column({ nullable: true })
   obs: string;
 
@@ -26,9 +29,6 @@ export class Cliente {
 
   @Column({ default: false })
   telefone: boolean;
-
-  @Column()
-  dtFechamento: Date;
 
   @CreateDateColumn()
   createdAt: Date;

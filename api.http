@@ -28,7 +28,8 @@ Content-Type: application/json
   "empresa": "Pedrinho CasaGrande Show",
   "mensalidade": 1799.99,
   "versao": 3.00,
-  "dataImplatancao": "2022-04-08",
+  "dtImplatancao": "2022-04-08",
+  "dtFechamento": "2022-04-08",
   "idnum": [135,190],
   "tipo": ["WhatsApp","Hibrido"]
 }
