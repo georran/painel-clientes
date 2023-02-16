@@ -2,7 +2,8 @@ export class CreateClienteDto {
   empresa: string;
   mensalidade: number;
   versao: number;
-  dataImplatancao: Date;
+  dtImplatancao: Date;
+  dtFechamento: Date;
   whatsapp: boolean;
   telefone: boolean;
   observacoes: string;

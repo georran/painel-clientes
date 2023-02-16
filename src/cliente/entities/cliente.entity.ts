@@ -1,5 +1,5 @@
 import { NumeroServico } from "./../../numero-servico/entities/numero-servico.entity";
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Cliente {
@@ -16,16 +16,25 @@ export class Cliente {
   versao: number;
 
   @Column()
-  dataImplatancao: Date;
+  dtImplatancao: Date;
 
   @Column({ nullable: true })
-  observacoes: string;
+  obs: string;
 
   @Column({ default: true })
   whatsapp: boolean;
 
   @Column({ default: false })
   telefone: boolean;
+
+  @Column()
+  dtFechamento: Date;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date
 
   @OneToMany(() => NumeroServico, numero => numero.cliente, { cascade: true })
   @JoinColumn({ name: "num_id" })

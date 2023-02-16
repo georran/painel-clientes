@@ -12,16 +12,16 @@ GET http://localhost:3000/test-auth
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoibWFyaWFubyIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjY3MDUxMTg1LCJleHAiOjE2NjcwNTEyNDV9.3qnZPXx8a8pRYKZUu-z8U5tm1VWKOTEEL8Y1Hc8EtZs
 
 ###
-GET http://localhost:3000/cliente
+GET http://localhost:3001/cliente
 
 ### id
-GET http://localhost:3000/cliente/1
+GET http://localhost:3001/cliente/1
 
 ### numero
 GET http://localhost:3000/numero-servico/n/190
 
 ### 
-POST http://localhost:3000/cliente
+POST http://localhost:3001/cliente
 Content-Type: application/json
 
 {

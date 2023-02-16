@@ -6,7 +6,8 @@ export function adicionarContatos(clientes: CreateClienteDto) {
   cliente.empresa = clientes.empresa;
   cliente.mensalidade = clientes.mensalidade;
   cliente.versao = clientes.versao;
-  cliente.dataImplatancao = clientes.dataImplatancao;
+  cliente.dtImplatancao = clientes.dtImplatancao;
+  cliente.dtFechamento = clientes.dtFechamento;
   cliente.numero = adicionarNums(clientes, cliente.id);
   cliente.whatsapp = tipoNum(clientes)[0];
   cliente.telefone = tipoNum(clientes)[1];
